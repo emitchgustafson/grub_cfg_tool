@@ -1,10 +1,21 @@
 #!/bin/bash
-sudo cp -rf /etc/grub.d /etc/grub.d.orig
-sudo rm -rf /etc/grub.d
-sudo cp -rf newgrub.d /etc/grub.d
+if [ "$1" == 'clean' ]; then
+   echo "cleaning grub";
+   sudo cp -rf /etc/grub.d /etc/grub.d.orig
+   sudo rm -rf /etc/grub.d
+   sudo cp -rf newgrub.d /etc/grub.d
 
-sudo chmod -R 755 /etc/grub.d
-sudo chown -R root /etc/grub.d
-sudo chgrp -R root /etc/grub.d
+   sudo chmod -R 755 /etc/grub.d
+   sudo chown -R root /etc/grub.d
+   sudo chgrp -R root /etc/grub.d
+
+elif [ "$1" == 'restore' ]; then
+   echo "restoring previos grub";
+   sudo rm -rf /etc/grub.d
+   sudo cp -rf /etc/grub.d.orig /etc/grub.d
+   sudo rm -rf /etc/grub.d.orig
+else
+	echo "Usage: 'clean' or 'restore' as 1st argument"
+fi
 
 sudo update-grub
