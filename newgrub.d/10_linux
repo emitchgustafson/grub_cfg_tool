@@ -274,7 +274,7 @@ EOF
 submenu_indentation=""
 
 is_top_level=true
-while [ "x$list" != "x" ] ; do
+#while [ "x$list" != "x" ] ; do
   linux=`version_find_latest $list`
   case $linux in
     *.efi.signed)
@@ -356,7 +356,7 @@ while [ "x$list" != "x" ] ; do
   fi
 
   list=`echo $list | tr ' ' '\n' | fgrep -vx "$linux" | tr '\n' ' '`
-done
+#done
 
 # If at least one kernel was found, then we need to
 # add a closing '}' for the submenu command.
