@@ -1,0 +1,10 @@
+#!/bin/bash
+sudo cp -rf /etc/grub.d /etc/grub.d.orig
+sudo rm -rf /etc/grub.d
+sudo cp -rf newgrub.d /etc/grub.d
+
+sudo chmod -R 755 /etc/grub.d
+sudo chown -R root /etc/grub.d
+sudo chgrp -R root /etc/grub.d
+
+sudo update-grub
