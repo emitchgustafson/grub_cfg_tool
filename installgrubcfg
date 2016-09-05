@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sudo mkdir /etc/grubcfg
+sudo mkdir /etc/grubcfg/backups
+sudo mkdir /etc/grubcfg/newcfgs
+sudo cp /etc/grub.d /etc/grubcfg/backups/orig
+sudo mv /
