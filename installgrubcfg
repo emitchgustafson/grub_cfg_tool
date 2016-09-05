@@ -5,4 +5,5 @@ sudo mkdir /etc/grubcfg/backups
 sudo cp -rf /etc/grub.d /etc/grubcfg/backups/orig
 sudo cp -rf newScripts /etc/grubcfg/newcfgs
 sudo cp grubcfg /usr/local/bin/grubcfg
+sudo cp /boot/grub/grub.cfg /boot/grub/grub.cfg.backup
 

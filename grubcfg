@@ -21,11 +21,11 @@ elif [ "$1" == '--restore' ]; then
    echo "Restoring origional grub"
    sudo rm -rf /etc/grub.d
    sudo cp -rf /etc/grubcfg/backups/orig /etc/grub.d
-elif [ "$1" == '--loadCfg' ] && [ "$2" != '' ]; then
+elif [ "$1" == '--load' ] && [ "$2" != '' ]; then
    echo "Restoring grub from file"
    sudo rm -rf /etc/grub.d
    sudo cp -rf /etc/grubcfg/backups/orig $2     
-elif [ "$1" == '--saveCfg' ] && [ "$2" != '' ]; then
+elif [ "$1" == '--save' ] && [ "$2" != '' ]; then
    echo "Backing up current grub to file"
    sudo cp -rf /etc/grub.d /etc/grubcfg/backups/$2
 else

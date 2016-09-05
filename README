@@ -1,0 +1,35 @@
+README for grubcfg
+
+This tool is designed to make changing the grub configuration much easier
+
+Run installgrubcfg to install program
+Upon installiation grub.cfg is backedup to grub.cfg.backup. If anything catastrophic goes wrong, a recovery disk can be used to restore this backup using file cp
+
+Usage:
+grubcfg --option argument
+
+Current options:
+
+--clean
+
+	will remove several options from the grub menu
+	Remove:
+		-Memtest options
+		-Ubuntu Advanced Menu
+	Kept(all others, by default):
+		-Ubuntu
+		-Other OS's on computer
+
+--restore
+
+	will restore the grub.d (and therefore grub.cfg) to the way it looked when grubcfg was installed
+
+--save <filename>
+
+	will save current configuration as <filename> in /etc/grubcfg/backups
+
+--load <filename>
+
+	will load a previously saved configuration located in /etc/grubcfg/backup/<filename>
+
+
