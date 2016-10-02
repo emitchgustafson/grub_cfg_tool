@@ -35,6 +35,11 @@ addPicture()
    cp $1 /boot/grub/image.png
 }
 
+removePicture()
+{
+   rm /boot/grub/image.png
+}
+
 if [ $EUID != 0 ]; then
    echo "Error: Please run as root"
    exit
@@ -56,11 +61,16 @@ elif [ "$1" == '--save' ] && [ "$2" != '' ]; then
 elif [ "$1" == '--list' ]; then
    list
    exit
-elif [ "$1" == '--add-Picture' ]; then
+elif [ "$1" == '--add-picture' ]; then
    echo "Copying Picture"
    addPicture $2
+elif [ "$1" == '--rm-picture' ]; then
+   echo "Removing Picture"
+   removePicture
+elif [ "$1" == '--help' ]; then
+   echo "Supported opreations include : --clean, --restore, --save, --load, --list, --add-picture, --rm-picture adn --help"
 else
-        echo "Usage: '--clean' or '--restore' as 1st argument"
+   echo "Usage error, run grubcfg --help"
 fi
 
 update-grub
