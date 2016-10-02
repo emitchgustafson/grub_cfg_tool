@@ -2,16 +2,43 @@
 
 rmAdMenu()
 {
-   sudo rm /etc/grub.d/10_linux
-   sudo cp /etc/grubcfg/newcfgs/10_linuxNoMenu /etc/grub.d/10_linuxNoMenu
-   sudo chmod +x /etc/grub.d/10_linuxNoMenu
-   sudo chgrp root /etc/grub.d/10_linuxNoMenu
-   sudo chown root /etc/grub.d/10_linuxNoMenu
+   rm /etc/grub.d/10_linux
+   cp /etc/grubcfg/newcfgs/10_linuxNoMenu /etc/grub.d/10_linuxNoMenu
+   chmod +x /etc/grub.d/10_linuxNoMenu
+   chgrp root /etc/grub.d/10_linuxNoMenu
+   chown root /etc/grub.d/10_linuxNoMenu
 }
+
 rmMemOpts()
 {
-   sudo rm /etc/grub.d/20_memtest86+
+   rm /etc/grub.d/20_memtest86+
 }
+
+save()
+{
+   cp -rf /etc/grub.d /etc/grubcfg/backups/$1
+}
+
+load()
+{
+   rm -rf /etc/grub.d
+   cp -rf /etc/grubcfg/backups/$1 /etc/grub.d
+}
+
+list()
+{
+   ls /etc/grubcfg/backups/
+}
+
+addPicture()
+{
+   cp $1 /boot/grub/image.png
+}
+
+if [ $EUID != 0 ]; then
+   echo "Error: Please run as root"
+   exit
+fi
 
 if [ "$1" == '--clean' ]; then
    echo "cleaning grub"
@@ -19,18 +46,21 @@ if [ "$1" == '--clean' ]; then
    rmMemOpts
 elif [ "$1" == '--restore' ]; then
    echo "Restoring origional grub"
-   sudo rm -rf /etc/grub.d
-   sudo cp -rf /etc/grubcfg/backups/orig /etc/grub.d
+   load /etc/orig
 elif [ "$1" == '--load' ] && [ "$2" != '' ]; then
    echo "Restoring grub from file"
-   sudo rm -rf /etc/grub.d
-   sudo cp -rf /etc/grubcfg/backups/orig $2     
+   load $2   
 elif [ "$1" == '--save' ] && [ "$2" != '' ]; then
    echo "Backing up current grub to file"
-   sudo cp -rf /etc/grub.d /etc/grubcfg/backups/$2
+   save $2
+elif [ "$1" == '--list' ]; then
+   list
+   exit
+elif [ "$1" == '--add-Picture' ]; then
+   echo "Copying Picture"
+   addPicture $2
 else
         echo "Usage: '--clean' or '--restore' as 1st argument"
 fi
 
-sudo update-grub
-
+update-grub
