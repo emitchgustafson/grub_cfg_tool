@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#sudo sed -i -e "s/'Ubuntuuu'/'Ubuntu'/" /boot/grub/grub.cfg
 rmAdMenu()
 {
    rm /etc/grub.d/10_linux
@@ -51,7 +51,7 @@ if [ "$1" == '--clean' ]; then
    rmMemOpts
 elif [ "$1" == '--restore' ]; then
    echo "Restoring origional grub"
-   load /etc/orig
+   load orig
 elif [ "$1" == '--load' ] && [ "$2" != '' ]; then
    echo "Restoring grub from file"
    load $2   
@@ -61,12 +61,15 @@ elif [ "$1" == '--save' ] && [ "$2" != '' ]; then
 elif [ "$1" == '--list' ]; then
    list
    exit
-elif [ "$1" == '--add-picture' ]; then
+elif [ "$1" == '--add_picture' ]; then
    echo "Copying Picture"
    addPicture $2
-elif [ "$1" == '--rm-picture' ]; then
+elif [ "$1" == '--rm_picture' ]; then
    echo "Removing Picture"
    removePicture
+elif [ "$1" == '--disp_grub' ]; then
+   grub_cfg_parser
+   exit
 elif [ "$1" == '--help' ]; then
    echo "Supported opreations include : --clean, --restore, --save, --load, --list, --add-picture, --rm-picture adn --help"
 else

@@ -38,6 +38,10 @@ int main(int argc, char* argv[])
    
    char *buffer = (char*) malloc(BUFSIZE); /* allocate buffer */ 
 
+   printf("-------------------------------------------------\n");
+   printf("Grub Menu Breakdown:\n");
+   printf("-------------------------------------------------\n");
+
    while ( fgets(buffer, BUFSIZE, DataFile) != NULL )
    {
 
@@ -75,6 +79,9 @@ int main(int argc, char* argv[])
       }
 
    }
+
+   printf("-------------------------------------------------\n");
+
    free(buffer);
    fclose(DataFile);
    return ErrorCode;
