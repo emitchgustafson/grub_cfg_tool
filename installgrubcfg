@@ -1,9 +1,11 @@
 #!/bin/bash
 
+gcc grub_parser.c -Wall -pedantic -o grub_cfg_parser
 sudo mkdir /etc/grubcfg
 sudo mkdir /etc/grubcfg/backups
 sudo cp -rf /etc/grub.d /etc/grubcfg/backups/orig
 sudo cp -rf newScripts /etc/grubcfg/newcfgs
 sudo cp grubcfg /usr/local/bin/grubcfg
+sudo cp grub_cfg_parser /usr/local/bin/grub_cfg_parser
 sudo cp /boot/grub/grub.cfg /boot/grub/grub.cfg.backup
 
